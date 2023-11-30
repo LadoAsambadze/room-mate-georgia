@@ -1,0 +1,34 @@
+.main {
+  padding: 20px 12px;
+  background-color: #00431a;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn {
+  color: #f9c745;
+  background-color: #00431a;
+  border: 1px solid #f9c745;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0 12px;
+  height: 28px;
+}
+
+.rightSide {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.burgerDiv {
+  margin-left: 15px;
+  @media (min-width: 768px) {
+    display: none;
+  }
+}

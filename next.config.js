@@ -1,4 +1,16 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const path = require("path");
 
-module.exports = nextConfig
+const nextConfig = {
+  sassOptions: {
+    includePaths: [path.join(__dirname, "styles")],
+  },
+  compiler: {
+    styledComponents: true,
+  },
+  env: {
+    API_URL: process.env.API_URL,
+  },
+};
+
+module.exports = nextConfig;
