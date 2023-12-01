@@ -105,14 +105,13 @@
 .burgerList {
   background-color: #00431a;
   width: 100%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: absolute;
   z-index: 1;
-  top: -121px;
+  top: -129px;
   left: 0;
   border-top: 0.5px solid white;
   transform: translateY(-100%);
