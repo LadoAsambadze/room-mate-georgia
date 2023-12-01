@@ -2,10 +2,13 @@
   padding: 20px 12px;
   background-color: #00431a;
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 3;
   @media (min-width: 768px) {
     padding: 25px 30px;
   }
@@ -28,7 +31,15 @@
     border-radius: 2px;
     height: 32px;
     padding: 0 15px;
+    font-size: 14px;
   }
+}
+
+.btn:hover {
+  background-color: white;
+
+  color: #19a463;
+  transition: 0.3s;
 }
 
 .rightSide {
@@ -69,6 +80,14 @@
   }
 }
 
+.mobileHeadersDiv {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding-left: 35%;
+  margin-bottom: 15px;
+}
+
 .headersDiv:hover .headers {
   transition: 0.3s;
   color: #19a463;
@@ -81,4 +100,26 @@
 
 .icon {
   fill: white;
+}
+
+.burgerList {
+  background-color: #00431a;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 1;
+  top: -121px;
+  left: 0;
+  border-top: 0.5px solid white;
+  transform: translateY(-100%);
+  transition: 0.5s;
+  padding-top: 20px;
+  padding-bottom: 30px;
+  @media (min-width: 768px) {
+    display: none;
+  }
 }
