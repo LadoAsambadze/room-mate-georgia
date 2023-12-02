@@ -17,20 +17,22 @@ export default function House() {
   }, []);
   return (
     <div className="w-full  min-h-screen flex flex-col items-center px-[15%] py-3 bg-[gray] ">
-      
-      <div className="w-full bg-white h-[320px] rounded-md flex flex-col ">
-        <div className="w-full h-[60%] relative">
-          <Image
-            src="/images/banner.png"
-            alt="Banner"
-            layout="fill"
-            objectFit="cover"
-          />
-        </div>
+      {house &&
+        house.map((item, index) => (
+          <div className="w-full bg-white h-[320px] rounded-md flex flex-col ">
+            <div className="w-full h-[60%] relative" key={index}>
+              <Image
+                src={item.images[0].original}
+                alt="Banner"
+                layout="fill"
+                objectFit="cover"
+              />
+            </div>
 
-        <span className=" text-[black]">Number of room</span>
-        <span className=" text-[black]">price</span>
-      </div>
+            <span className=" text-[black]">Number of room</span>
+            <span className=" text-[black]">{item.price}</span>
+          </div>
+        ))}
     </div>
   );
 }
