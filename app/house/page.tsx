@@ -54,6 +54,7 @@ export default function House() {
               <Carousel responsive={responsive} infinite={true}>
                 {item.images.map((image, i) => (
                   <div
+                    key={i}
                     style={{
                       position: "relative",
                       width: "100%",
@@ -61,7 +62,6 @@ export default function House() {
                     }}
                   >
                     <Image
-                      key={i}
                       src={image.original}
                       alt="House image"
                       layout="fill"
@@ -84,7 +84,9 @@ export default function House() {
         ))}
       <div className="pagination">
         {[...Array(totalPages)].map((_, i) => (
-          <button onClick={() => changePage(i + 1)}>{i + 1}</button>
+          <button key={i} onClick={() => changePage(i + 1)}>
+            {i + 1}
+          </button>
         ))}
       </div>
     </div>
