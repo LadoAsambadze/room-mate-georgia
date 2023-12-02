@@ -1,11 +1,15 @@
 "use client";
 import React from "react";
 import "./_header.scss";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/menuSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, setMenu } from "@/redux/menuSlice";
+import { useRouter } from "next/navigation";
 
 export default function BurgerList() {
   const menu = useSelector((state: RootState) => state.menu.menu);
+  const router = useRouter();
+  const dispatch = useDispatch();
+  console.log(menu);
 
   return (
     <div
@@ -14,12 +18,22 @@ export default function BurgerList() {
         transform: !menu ? "translateY(100%)" : "translateY(-100%)",
       }}
     >
-      <div className="mobileHeadersDiv">
+      <div
+        className="mobileHeadersDiv"
+        onClick={() => {
+          dispatch(setMenu(!menu)), router.push("/");
+        }}
+      >
         <h1 style={{ marginLeft: "-0.5px" }} className="headers">
           Home
         </h1>
       </div>
-      <div className="mobileHeadersDiv">
+      <div
+        className="mobileHeadersDiv"
+        onClick={() => {
+          dispatch(setMenu(!menu));
+        }}
+      >
         <svg
           className="icon"
           width="20"
@@ -32,7 +46,7 @@ export default function BurgerList() {
         </svg>
         <h1 className="headers">Find a Roomate</h1>
       </div>
-      <div className="mobileHeadersDiv">
+      <div className="mobileHeadersDiv" onClick={() => router.push("house")}>
         <svg
           className="icon"
           width="24"
@@ -49,7 +63,12 @@ export default function BurgerList() {
         </svg>
         <h1 className="headers">rent an apartment</h1>
       </div>
-      <div className="mobileHeadersDiv">
+      <div
+        className="mobileHeadersDiv"
+        onClick={() => {
+          dispatch(setMenu(!menu));
+        }}
+      >
         <svg
           className="icon"
           width="20"

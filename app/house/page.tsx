@@ -82,7 +82,7 @@ export default function House() {
           </div>
         ))}
       <div className="pagination">
-        {[...Array(totalPages)].map((page, i) => (
+        {[...Array(totalPages)].map((_, i) => (
           <button onClick={() => changePage(i + 1)}>{i + 1}</button>
         ))}
       </div>

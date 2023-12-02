@@ -1,8 +1,11 @@
 "use client";
 
 import SectionTwo from "./SectionTwo";
+import { useRouter } from "next/navigation";
 
 export default function Main() {
+  const router = useRouter();
+
   return (
     <>
       <div
@@ -44,6 +47,7 @@ export default function Main() {
             </div>
 
             <div
+              onClick={() => router.push("/house")}
               className="text-white  cursor-pointer bg-[#19a463] flex flex-row align-center px-[90px] py-4 rounded-md border-none mt-6 
             md:mt-0 md:ml-10"
             >

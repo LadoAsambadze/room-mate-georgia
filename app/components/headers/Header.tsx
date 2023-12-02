@@ -6,15 +6,18 @@ import { useDispatch, useSelector } from "react-redux";
 import "./_header.scss";
 import { RootState, setMenu } from "@/redux/menuSlice";
 import BurgerList from "./BurgerList";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const menu = useSelector((state: RootState) => state.menu.menu);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   return (
     <>
       <div className="main">
         <Image
+          onClick={() => router.push("/")}
           height={30}
           width={177}
           src="/images/rommate2-05.png"
@@ -24,10 +27,15 @@ export default function Header() {
           className="rightSide"
           style={{ display: "flex", flexDirection: "row" }}
         >
-          <div className="headersDiv">
+          <div
+            className="headersDiv"
+            onClick={() => {
+              router.push("/");
+            }}
+          >
             <h1 className="headers">Home</h1>
           </div>
-          <div className="headersDiv ">
+          <div className="headersDiv">
             <svg
               className="icon"
               width="20"
@@ -40,7 +48,12 @@ export default function Header() {
             </svg>
             <h1 className="headers">Find a Roommate</h1>
           </div>
-          <div className="headersDiv">
+          <div
+            className="headersDiv"
+            onClick={() => {
+              router.push("house");
+            }}
+          >
             <svg
               className="icon"
               width="24"
@@ -71,11 +84,10 @@ export default function Header() {
             <span className="headers">Geo</span>
           </div>
           <button className="btn">Login</button>
-          <div className="burgerDiv">
+          <div className="burgerDiv" onClick={() => dispatch(setMenu(!menu))}>
             {menu ? (
               <svg
                 className="icon"
-                onClick={() => dispatch(setMenu(!menu))}
                 width="23"
                 height="21"
                 viewBox="0 0 23 21"
@@ -86,7 +98,6 @@ export default function Header() {
               </svg>
             ) : (
               <svg
-                onClick={() => dispatch(setMenu(!menu))}
                 className="icon"
                 width="23"
                 height="23"
