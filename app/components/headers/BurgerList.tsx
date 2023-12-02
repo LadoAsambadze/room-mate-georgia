@@ -9,7 +9,6 @@ export default function BurgerList() {
   const menu = useSelector((state: RootState) => state.menu.menu);
   const router = useRouter();
   const dispatch = useDispatch();
-  console.log(menu);
 
   return (
     <div

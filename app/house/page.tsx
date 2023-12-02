@@ -46,10 +46,11 @@ export default function House() {
       {currentItems &&
         currentItems.map((item, index) => (
           <div
+            key={index}
             className="w-[350px] bg-white h-[300px] rounded-md flex flex-col rounded-2 overflow-hidden shadow-2xl shadow-#7f7878-400
           md:w-full"
           >
-            <div className="w-full h-[75%] relative" key={index}>
+            <div className="w-full h-[75%] relative">
               <Carousel responsive={responsive} infinite={true}>
                 {item.images.map((image, i) => (
                   <div
