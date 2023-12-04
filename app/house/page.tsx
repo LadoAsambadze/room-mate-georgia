@@ -7,7 +7,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 interface ImageType {
-  original: string;
+  thumb: string;
 }
 interface HouseType {
   room: number;
@@ -17,38 +17,30 @@ interface HouseType {
   };
   images: ImageType[];
 }
+
 export default function House() {
   const [house, setHouse] = useState<HouseType[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  let size = 5;
+  const searchParams = new URLSearchParams(location.search);
+  const page = searchParams.get("page") || "1";
 
   useEffect(() => {
     const getHouse = async () => {
-      const response = await axios.get("https://api.roommategeorgia.ge/flats");
+      const response = await axios.get(
+        `https://api.roommategeorgia.ge/flats?page=${page}`
+      );
       setHouse(response.data.data);
     };
     getHouse();
-  }, []);
-
-  const currentItems = house.slice(
-    (currentPage - 1) * size,
-    currentPage * size
-  );
-
-  const totalPages = Math.ceil(house.length / size);
-
-  const changePage = (newPage: number) => {
-    setCurrentPage(newPage);
-  };
+  }, [page]);
 
   return (
-    <div className="w-full  min-h-screen  grid  grid-col-1 gap-6 justify-center px-[10%]  py-5 bg-[#eee8e8]  md:grid-cols-2 ">
-      {currentItems &&
-        currentItems.map((item, index) => (
+    <div className="w-full min-h-screen grid grid-col-1 gap-6 justify-center px-[10%] py-5 bg-[#eee8e8] md:grid-cols-2 ">
+      {house &&
+        house.map((item, index) => (
           <div
             key={index}
             className="w-[350px] bg-white h-[300px] rounded-md flex flex-col rounded-2 overflow-hidden shadow-2xl shadow-#7f7878-400
-          md:w-full"
+        md:w-full"
           >
             <div className="w-full h-[75%] relative">
               <Carousel responsive={responsive} infinite={true}>
@@ -62,7 +54,7 @@ export default function House() {
                     }}
                   >
                     <Image
-                      src={image.original}
+                      src={image.thumb}
                       alt="House image"
                       layout="fill"
                       objectFit="cover"
@@ -82,13 +74,6 @@ export default function House() {
             </div>
           </div>
         ))}
-      <div className="pagination">
-        {[...Array(totalPages)].map((_, i) => (
-          <button key={i} onClick={() => changePage(i + 1)}>
-            {i + 1}
-          </button>
-        ))}
-      </div>
     </div>
   );
 }
