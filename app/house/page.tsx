@@ -17,10 +17,11 @@ interface HouseType {
   };
   images: ImageType[];
 }
+import { useSearchParams } from "next/navigation";
 
-export default function House() {
+export default function Page() {
   const [house, setHouse] = useState<HouseType[]>([]);
-  const searchParams = new URLSearchParams(location.search);
+  const searchParams = useSearchParams();
   const page = searchParams.get("page") || "1";
 
   useEffect(() => {
