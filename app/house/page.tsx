@@ -26,7 +26,6 @@ import { useDispatch, useSelector } from "react-redux";
 export default function Page() {
   const [house, setHouse] = useState<HouseType[]>([]);
   const searchParams = useSearchParams();
-
   const houseFilter = useSelector(
     (state: RootState) => state.houseFilter.houseFilter
   );
@@ -35,38 +34,38 @@ export default function Page() {
   const houseFilterRange = useSelector(
     (state: RootState) => state.houseFilter.rangeValues
   );
-  const page = searchParams.get("page") || "1";
-  const price_from = searchParams.get("price_from") || null;
-  const price_to = searchParams.get("price_to") || null;
-  const room_from = searchParams.get("room_from") || null;
-  const room_to = searchParams.get("room_to") || null;
-  const area_from = searchParams.get("area_from") || null;
-  const area_to = searchParams.get("area_to") || null;
-  const bedroom_from = searchParams.get("bedroom_from") || null;
-  const bedroom_to = searchParams.get("bedroom_to") || null;
 
   const queryParams = {
     districts: houseFilterRange?.districts || null,
-    bedroom_from: houseFilterRange?.bedroom_from || bedroom_from,
-    bedroom_to: houseFilterRange?.bedroom_to || bedroom_to,
-    room_from: houseFilterRange?.room_from || room_from,
-    room_to: houseFilterRange?.room_to || room_to,
-    area_from: houseFilterRange?.area_from || area_from,
-    area_to: houseFilterRange?.area_to || area_to,
-    price_from: houseFilterRange?.price_from || price_from,
-    price_to: houseFilterRange?.price_to || price_to,
-    page: page || null,
+    bedroom_from:
+      houseFilterRange?.bedroom_from || searchParams.get("bedroom_from"),
+    bedroom_to: houseFilterRange?.bedroom_to || searchParams.get("bedroom_to"),
+    room_from: houseFilterRange?.room_from || searchParams.get("room_from"),
+    room_to: houseFilterRange?.room_to || searchParams.get("room_to"),
+    area_from: houseFilterRange?.area_from || searchParams.get("area_from"),
+    area_to: houseFilterRange?.area_to || searchParams.get("area_to"),
+    price_from: houseFilterRange?.price_from || searchParams.get("price_from"),
+    price_to: houseFilterRange?.price_to || searchParams.get("price_to"),
+    page: searchParams.get("page") || "1",
   };
 
   useEffect(() => {
     const getHouse = async () => {
-      const response = await axios.get(`https://api.roommategeorgia.ge/flats`, {
-        params: queryParams,
-      });
-      setHouse(response.data.data);
+      try {
+        const response = await axios.get(
+          `https://api.roommategeorgia.ge/flats`,
+          {
+            params: queryParams,
+          }
+        );
+        setHouse(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
     };
+
     const nonNullParams = Object.fromEntries(
-      Object.entries(queryParams).filter(([key, value]) => value !== null)
+      Object.entries(queryParams).filter(([_, value]) => value !== null)
     );
     const queryString = new URLSearchParams(nonNullParams).toString();
     router.push(`/house?${queryString}`);
@@ -95,12 +94,12 @@ export default function Page() {
         <HouseFilter />
       </div>
 
-      <div className="w-full flex flex-col items-center justify-center  px-3 py-5 bg-[#eee8e8] md:grid md:grid-cols-2 md:gap-6">
+      <div className="w-full min-h-screen flex flex-col items-center justify-center gap-6  px-3 py-5 bg-[#eee8e8] md:grid md:grid-cols-2 md:gap-6">
         {house &&
           house.map((item, index) => (
             <div
               key={index}
-              className="w-[350px] bg-white h-[300px] rounded-md flex flex-col rounded-2 overflow-hidden shadow-2xl shadow-#7f7878-400
+              className="w-[350px] bg-white h-[300px] rounded-md flex flex-col  rounded-2 overflow-hidden shadow-2xl shadow-#7f7878-400
         md:w-full"
             >
               <div className="w-full h-[75%] relative">
