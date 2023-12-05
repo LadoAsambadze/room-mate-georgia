@@ -1,13 +1,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/houseFilterSlice";
 import ArrowDown from "../../../public/images/arrow-down.png";
 import Image from "next/image";
 import FilterLoop from "../../../public/images/filter-loop.png";
+interface DataType {
+  title: string;
+}
+interface FilterType {
+  title: string;
+  search_type: string;
+  data: DataType[];
+}
 export default function HouseFilter() {
-  const houseFilter = useSelector((state: RootState) => state.houseFilter);
-  const [filterList, setFilterList] = useState([]);
+  const [filterList, setFilterList] = useState<FilterType[]>([]);
   const [select, setSelect] = useState(false);
 
   useEffect(() => {
@@ -19,8 +24,6 @@ export default function HouseFilter() {
     };
     getFilters();
   }, []);
-
-  console.log(filterList);
 
   return (
     <>
@@ -68,7 +71,6 @@ export default function HouseFilter() {
             ))}
           </div>
         )}
-
         <div className="w-full  rounded-md bg-[#19A463]  py-3 flex flex-row items-center justify-center">
           <Image
             src={FilterLoop}
