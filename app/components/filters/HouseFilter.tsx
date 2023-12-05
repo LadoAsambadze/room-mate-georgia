@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import ArrowDown from "../../../public/images/arrow-down.png";
 import Image from "next/image";
 import FilterLoop from "../../../public/images/filter-loop.png";
+import { setRangeValuesRedux } from "@/redux/houseFilterSlice";
+import { useDispatch } from "react-redux";
 interface DataType {
   title: string;
 }
@@ -13,7 +15,9 @@ interface FilterType {
 }
 export default function HouseFilter() {
   const [filterList, setFilterList] = useState<FilterType[]>([]);
+  const [rangeValues, setRangeValues] = useState({});
   const [select, setSelect] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getFilters = async () => {
@@ -24,6 +28,13 @@ export default function HouseFilter() {
     };
     getFilters();
   }, []);
+
+  const handleRangeChange = (title: string, value: string) => {
+    setRangeValues((prevState) => ({
+      ...prevState,
+      [title]: value,
+    }));
+  };
 
   return (
     <>
@@ -50,8 +61,41 @@ export default function HouseFilter() {
                   type="number"
                   placeholder="Start"
                   className="mr-2 w-[50%]"
+                  onChange={(e) =>
+                    handleRangeChange(
+                      item.title === "საძინებელი"
+                        ? "bedroom_from"
+                        : item.title === "ოთახი"
+                        ? "room_from"
+                        : item.title === "ფასი"
+                        ? "price_from"
+                        : item.title === "საერთო ფართი"
+                        ? "area_from"
+                        : item.title,
+                      e.target.value
+                    )
+                  }
                 />
-                <input type="number" placeholder="End" className=" w-[50%]" />
+
+                <input
+                  type="number"
+                  placeholder="End"
+                  className="w-[50%]"
+                  onChange={(e) =>
+                    handleRangeChange(
+                      item.title === "საძინებელი"
+                        ? "bedroom_to"
+                        : item.title === "ოთახი"
+                        ? "room_to"
+                        : item.title === "ფასი"
+                        ? "price_to"
+                        : item.title === "საერთო ფართი"
+                        ? "area_to"
+                        : item.title,
+                      e.target.value
+                    )
+                  }
+                />
               </div>
             )}
           </div>
@@ -78,7 +122,12 @@ export default function HouseFilter() {
             width={20}
             height={20}
           />
-          <span className="ml-2 text-white text-xs">Filter</span>
+          <span
+            className="ml-2 text-white text-xs"
+            onClick={() => dispatch(setRangeValuesRedux(rangeValues))}
+          >
+            Filter
+          </span>
         </div>
       </div>
     </>

@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface Type {
   houseFilter: Boolean;
+  rangeValues: any; // Add this line
 }
 
 const initialState: Type = {
   houseFilter: false,
+  rangeValues: {}, // Add this line
 };
 
 const houseFilterSlice = createSlice({
@@ -15,10 +17,14 @@ const houseFilterSlice = createSlice({
     setHouseFilter: (state, action: PayloadAction<Boolean>) => {
       state.houseFilter = action.payload;
     },
+    setRangeValuesRedux: (state, action: PayloadAction<any>) => {
+      // Add this reducer
+      state.rangeValues = action.payload;
+    },
   },
 });
 
-export const { setHouseFilter } = houseFilterSlice.actions;
+export const { setHouseFilter, setRangeValuesRedux } = houseFilterSlice.actions; // Export the new action
 
 export default houseFilterSlice.reducer;
 export type RootState = {

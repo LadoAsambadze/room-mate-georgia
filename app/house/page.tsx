@@ -18,34 +18,54 @@ interface HouseType {
   };
   images: ImageType[];
 }
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import HouseFilter from "../components/filters/HouseFilter";
-
 import { RootState, setHouseFilter } from "@/redux/houseFilterSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Page() {
   const [house, setHouse] = useState<HouseType[]>([]);
   const searchParams = useSearchParams();
-  const page = searchParams.get("page") || "1";
+
   const houseFilter = useSelector(
     (state: RootState) => state.houseFilter.houseFilter
   );
   const dispatch = useDispatch();
-  console.log(houseFilter);
+  const router = useRouter();
+  const houseFilterRange = useSelector(
+    (state: RootState) => state.houseFilter.rangeValues
+  );
+  const page = searchParams.get("page") || "1";
+  const price_from = searchParams.get("price_from") || null;
+
+  const queryParams = {
+    districts: houseFilterRange?.districts || null,
+    bedroom_from: houseFilterRange?.bedroom_from || null,
+    bedroom_to: houseFilterRange?.bedroom_to || null,
+    room_from: houseFilterRange?.room_from || null,
+    room_to: houseFilterRange?.room_to || null,
+    area_from: houseFilterRange?.area_from || null,
+    area_to: houseFilterRange?.area_to || null,
+    price_from: houseFilterRange?.price_from || price_from,
+    price_to: houseFilterRange?.price_to || null,
+    page: page || null,
+  };
+
   useEffect(() => {
     const getHouse = async () => {
-      const response = await axios.get(
-        `https://api.roommategeorgia.ge/flats?page=${page}`
-      );
+      const response = await axios.get(`https://api.roommategeorgia.ge/flats`, {
+        params: queryParams,
+      });
       setHouse(response.data.data);
-      const response1 = await axios.get(
-        `https://api.roommategeorgia.ge/flats/filters`
-      );
     };
+    const nonNullParams = Object.fromEntries(
+      Object.entries(queryParams).filter(([key, value]) => value !== null)
+    );
+    const queryString = new URLSearchParams(nonNullParams).toString();
+    router.push(`/house?${queryString}`);
 
     getHouse();
-  }, [page]);
+  }, [houseFilterRange]);
 
   return (
     <>

@@ -6,6 +6,7 @@ const store = configureStore({
   reducer: {
     menu: menuSlice,
     houseFilter: houseFilterSlice,
+    rangeValues: houseFilterSlice,
   },
 });
 export type RootState = ReturnType<typeof store.getState>;
