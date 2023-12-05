@@ -24,7 +24,7 @@ export default function HouseFilter() {
 
   return (
     <>
-      <div className="w-full bg-white px-4 py-4 rounded-md flex flex-col items-start h-[400px]  justify-between  ">
+      <div className=" w-screen bg-white px-4 py-4 rounded-md flex flex-col items-start h-[400px]  justify-between  ">
         {filterList.map((item, index) => (
           <div key={index} className="flex flex-col w-full">
             <label htmlFor={item.title}>{item.title}</label>

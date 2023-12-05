@@ -21,11 +21,18 @@ interface HouseType {
 import { useSearchParams } from "next/navigation";
 import HouseFilter from "../components/filters/HouseFilter";
 
+import { RootState, setHouseFilter } from "@/redux/houseFilterSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 export default function Page() {
   const [house, setHouse] = useState<HouseType[]>([]);
   const searchParams = useSearchParams();
   const page = searchParams.get("page") || "1";
-
+  const houseFilter = useSelector(
+    (state: RootState) => state.houseFilter.houseFilter
+  );
+  const dispatch = useDispatch();
+  console.log(houseFilter);
   useEffect(() => {
     const getHouse = async () => {
       const response = await axios.get(
@@ -42,8 +49,26 @@ export default function Page() {
 
   return (
     <>
-      <Image src={FilterIcon} alt="Filter Icon" className="cursor-pointer" />
-      <div className=" relative w-full min-h-screen grid grid-col-1 gap-6 justify-center px-[10%] py-5 bg-[#eee8e8] md:grid-cols-2 ">
+      <div className="w-full flex flex-start bg-[#eee8e8]">
+        <Image
+          src={FilterIcon}
+          alt="Filter Icon"
+          className="cursor-pointer"
+          onClick={() => dispatch(setHouseFilter(!houseFilter))}
+        />
+      </div>
+      <div
+        style={{
+          position: "absolute",
+          transform: houseFilter ? "translateX(0%)" : "translateX(-120%)",
+          zIndex: 330000,
+          transition: "0.3s",
+        }}
+      >
+        <HouseFilter />
+      </div>
+
+      <div className="w-full flex flex-col items-center justify-center  px-3 py-5 bg-[#eee8e8] md:grid md:grid-cols-2 md:gap-6">
         {house &&
           house.map((item, index) => (
             <div
@@ -83,17 +108,6 @@ export default function Page() {
               </div>
             </div>
           ))}
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          top: 50,
-          left: 50,
-          width: "400px",
-          zIndex: "300000",
-        }}
-      >
-        <HouseFilter />
       </div>
     </>
   );
