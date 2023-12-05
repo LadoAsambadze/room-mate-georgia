@@ -37,17 +37,24 @@ export default function Page() {
   );
   const page = searchParams.get("page") || "1";
   const price_from = searchParams.get("price_from") || null;
+  const price_to = searchParams.get("price_to") || null;
+  const room_from = searchParams.get("room_from") || null;
+  const room_to = searchParams.get("room_to") || null;
+  const area_from = searchParams.get("area_from") || null;
+  const area_to = searchParams.get("area_to") || null;
+  const bedroom_from = searchParams.get("bedroom_from") || null;
+  const bedroom_to = searchParams.get("bedroom_to") || null;
 
   const queryParams = {
     districts: houseFilterRange?.districts || null,
-    bedroom_from: houseFilterRange?.bedroom_from || null,
-    bedroom_to: houseFilterRange?.bedroom_to || null,
-    room_from: houseFilterRange?.room_from || null,
-    room_to: houseFilterRange?.room_to || null,
-    area_from: houseFilterRange?.area_from || null,
-    area_to: houseFilterRange?.area_to || null,
+    bedroom_from: houseFilterRange?.bedroom_from || bedroom_from,
+    bedroom_to: houseFilterRange?.bedroom_to || bedroom_to,
+    room_from: houseFilterRange?.room_from || room_from,
+    room_to: houseFilterRange?.room_to || room_to,
+    area_from: houseFilterRange?.area_from || area_from,
+    area_to: houseFilterRange?.area_to || area_to,
     price_from: houseFilterRange?.price_from || price_from,
-    price_to: houseFilterRange?.price_to || null,
+    price_to: houseFilterRange?.price_to || price_to,
     page: page || null,
   };
 

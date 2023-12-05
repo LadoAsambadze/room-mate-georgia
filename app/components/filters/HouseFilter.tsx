@@ -103,7 +103,7 @@ export default function HouseFilter() {
         {select && (
           <div className="absolute bg-[#f9f6f6] top-[86px] w-[90%] h-[270px] overflow-y-scroll">
             {filterList.map((item) => (
-              <div>
+              <>
                 {item.data &&
                   item.data.map((obj, index) => (
                     <label key={index} className="flex flex-row">
@@ -111,7 +111,7 @@ export default function HouseFilter() {
                       {obj.title}
                     </label>
                   ))}
-              </div>
+              </>
             ))}
           </div>
         )}
