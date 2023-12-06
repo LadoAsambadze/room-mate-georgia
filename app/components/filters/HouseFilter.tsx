@@ -3,8 +3,12 @@ import { useEffect, useState } from "react";
 import ArrowDown from "../../../public/images/arrow-down.png";
 import Image from "next/image";
 import FilterLoop from "../../../public/images/filter-loop.png";
-import { setRangeValuesRedux } from "@/redux/houseFilterSlice";
-import { useDispatch } from "react-redux";
+import {
+  RootState,
+  setHouseFilter,
+  setRangeValuesRedux,
+} from "@/redux/houseFilterSlice";
+import { useDispatch, useSelector } from "react-redux";
 interface DataType {
   title: string;
 }
@@ -17,6 +21,9 @@ export default function HouseFilter() {
   const [filterList, setFilterList] = useState<FilterType[]>([]);
   const [rangeValues, setRangeValues] = useState({});
   const [select, setSelect] = useState(false);
+  const houseFilter = useSelector(
+    (state: RootState) => state.houseFilter.houseFilter
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,9 +45,15 @@ export default function HouseFilter() {
 
   return (
     <>
-      <div className=" w-screen bg-white px-4 py-4 rounded-md flex flex-col items-start h-[400px]  justify-between  ">
+      <div className=" w-screen bg-white px-4 py-4 rounded-md  rounded-t-none flex flex-col items-start h-[400px]  justify-between  ">
         {filterList.map((item, index) => (
           <div key={index} className="flex flex-col w-full">
+            <div
+              className="absolute right-6 top-2"
+              onClick={() => dispatch(setHouseFilter(!houseFilter))}
+            >
+              x
+            </div>
             <label htmlFor={item.title}>{item.title}</label>
             {item.search_type === "choice" && (
               <div

@@ -5,7 +5,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import FilterIcon from "../../public/images/filter.png";
+import FilterIcon from "../../public/images/filter-slider.svg";
 import CircularProgress from "@mui/material/CircularProgress";
 
 interface ImageType {
@@ -82,26 +82,32 @@ export default function Page() {
         </div>
       ) : (
         <>
-          <div className="w-full flex flex-start bg-[#eee8e8]">
-            <Image
-              src={FilterIcon}
-              alt="Filter Icon"
-              className="cursor-pointer"
-              onClick={() => dispatch(setHouseFilter(!houseFilter))}
-            />
-          </div>
-          <div
-            style={{
-              position: "absolute",
-              transform: houseFilter ? "translateX(0%)" : "translateX(-120%)",
-              zIndex: 330000,
-              transition: "0.3s",
-            }}
-          >
-            <HouseFilter />
+          <div className="w-full flex  items-center justify-center bg-[#F7F7F7] px-3 pt-5 pb-2 md:px-7 lg:px-14">
+            <div className="flex items-center  w-[350px] md:flex-start md:w-full">
+              <Image
+                src={FilterIcon}
+                alt="Filter Icon"
+                className="cursor-pointer"
+                onClick={() => dispatch(setHouseFilter(!houseFilter))}
+              />
+            </div>
+            <div
+              style={{
+                position: "absolute",
+                transform: houseFilter ? "translateX(0%)" : "translateX(-120%)",
+                zIndex: 330000,
+                transition: "0.3s",
+                top: 80,
+              }}
+            >
+              <HouseFilter />
+            </div>
           </div>
 
-          <div className="w-full min-h-screen flex flex-col items-center justify-center gap-6  px-3 py-5 bg-[#eee8e8] md:grid md:grid-cols-2 md:gap-6">
+          <div
+            className="w-full min-h-screen flex flex-col items-center justify-center gap-6  px-3 py-5 bg-[#F7F7F7] 
+          md:grid md:grid-cols-2 md:gap-6 md:items-start md:px-7 lg:px-14"
+          >
             {house &&
               house.map((item, index) => (
                 <div
