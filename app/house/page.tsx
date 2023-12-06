@@ -117,7 +117,7 @@ export default function Page() {
        }}
        className="w-full min-h-screen flex flex-col items-center justify-center gap-6   md:grid md:grid-cols-2 md:gap-6 md:items-start lg:ml-7 "
       >
-       {house &&
+       {house && house.length > 0 ? (
         house.map((item, index) => (
          <div
           onClick={() => router.push(`/house/${item.id}`)}
@@ -155,7 +155,7 @@ export default function Page() {
            <div className="flex flex-row items-center">
             <Image src={LocationIcon} alt="Location Icon" />
             <span className=" text-[black] ml-2 text-xs">
-             Location:&nbsp;
+             Location: 
              {item.district.title}
             </span>
            </div>
@@ -165,7 +165,10 @@ export default function Page() {
            </span>
           </div>
          </div>
-        ))}
+        ))
+       ) : (
+        <div>item is zero</div>
+       )}
       </div>
      </div>
     </>
