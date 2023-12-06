@@ -1,9 +1,10 @@
 'use client'
 
-import SectionTwo from './SectionTwo'
 import { useRouter } from 'next/navigation'
+import SectionTwo from './SectionTwo'
 
 export default function Main() {
+ const router = useRouter()
  return (
   <>
    <div

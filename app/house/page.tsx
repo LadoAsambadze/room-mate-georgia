@@ -14,7 +14,6 @@ import { RootState, setHouseFilter } from '@/redux/houseFilterSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import LocationIcon from '../../public/images/location.svg'
 
-
 interface ImageType {
  thumb: string
 }
