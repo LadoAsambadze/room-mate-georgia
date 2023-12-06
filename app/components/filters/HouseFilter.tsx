@@ -13,6 +13,7 @@ interface DataType {
  title: string
 }
 interface FilterType {
+ id: string
  title: string
  search_type: string
  data: DataType[]
@@ -30,7 +31,6 @@ export default function HouseFilter() {
 
  useEffect(() => {
   const getFilters = async () => {
-   console.log('test')
    const response = await axios.get(
     'https://api.roommategeorgia.ge/flats/filters'
    )

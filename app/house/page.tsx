@@ -14,6 +14,7 @@ import { RootState, setHouseFilter } from '@/redux/houseFilterSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import LocationIcon from '../../public/images/location.svg'
 
+
 interface ImageType {
  thumb: string
 }
@@ -21,6 +22,7 @@ interface ImageType {
 interface HouseType {
  room: number
  price: number
+ id: string
  district: {
   title: string
  }
@@ -119,6 +121,7 @@ export default function Page() {
        {house &&
         house.map((item, index) => (
          <div
+          onClick={() => router.push(`/house/${item.id}`)}
           key={index}
           className="w-[330px] bg-white  rounded-md flex flex-col  rounded-2 overflow-hidden  shadow-boxItem  md:w-full"
          >
