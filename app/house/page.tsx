@@ -76,14 +76,29 @@ export default function Page() {
 
   return (
     <>
+      <div
+        className="lg:hidden"
+        style={{
+          position: "absolute",
+          transform: houseFilter ? "translateX(0%)" : "translateX(-120%)",
+          zIndex: 330000,
+          transition: "0.3s",
+          top: 70,
+        }}
+      >
+        <HouseFilter />
+      </div>
       {house.length === 0 ? (
         <div className="w-full  min-h-screen flex justify-center items-center">
           <CircularProgress style={{ color: "Green" }} />
         </div>
       ) : (
         <>
-          <div className="w-full flex  items-center justify-center bg-[#F7F7F7] px-3 pt-5 pb-2 md:px-7 lg:px-14">
-            <div className="flex items-center  w-[350px] md:flex-start md:w-full">
+          <div
+            className="w-full flex  items-center justify-center bg-[#F7F7F7] px-3 pt-5 pb-2 md:px-12 lg:px-12 lg:flex-row destkop:px-60"
+            style={{ filter: houseFilter ? "blur(5px)" : "" }}
+          >
+            <div className="flex items-center  w-[350px] md:flex-start md:w-full lg:hidden ">
               <Image
                 src={FilterIcon}
                 alt="Filter Icon"
@@ -91,64 +106,58 @@ export default function Page() {
                 onClick={() => dispatch(setHouseFilter(!houseFilter))}
               />
             </div>
-            <div
-              style={{
-                position: "absolute",
-                transform: houseFilter ? "translateX(0%)" : "translateX(-120%)",
-                zIndex: 330000,
-                transition: "0.3s",
-                top: 80,
-              }}
-            >
+          </div>
+          <div className="w-full min-h-screen flex flex-col items-start justify-center py-2 bg-[#F7F7F7] md:px-12 lg:flex-row  lg:px-12 desktop:px-60 ">
+            <div className="hidden lg:flex lg:w-[350px]">
               <HouseFilter />
             </div>
-          </div>
-
-          <div
-            className="w-full min-h-screen flex flex-col items-center justify-center gap-6  px-3 py-5 bg-[#F7F7F7] 
-          md:grid md:grid-cols-2 md:gap-6 md:items-start md:px-7 lg:px-14"
-          >
-            {house &&
-              house.map((item, index) => (
-                <div
-                  key={index}
-                  className="w-[350px] bg-white h-[300px] rounded-md flex flex-col  rounded-2 overflow-hidden shadow-2xl shadow-#7f7878-400
+            <div
+              style={{ filter: houseFilter ? "blur(5px)" : "" }}
+              className="w-full min-h-screen flex flex-col items-center justify-center gap-6   
+          md:grid md:grid-cols-2 md:gap-6 md:items-start lg:ml-7 "
+            >
+              {house &&
+                house.map((item, index) => (
+                  <div
+                    key={index}
+                    className="w-[330px] bg-white h-[300px] rounded-md flex flex-col  rounded-2 overflow-hidden shadow-2xl shadow-#7f7878-400
         md:w-full"
-                >
-                  <div className="w-full h-[75%] relative">
-                    <Carousel responsive={responsive} infinite={true}>
-                      {item.images.map((image, i) => (
-                        <div
-                          key={i}
-                          style={{
-                            position: "relative",
-                            width: "100%",
-                            height: "200px",
-                          }}
-                        >
-                          <Image
-                            src={image.thumb}
-                            alt="House image"
-                            layout="fill"
-                            objectFit="cover"
-                          />
-                        </div>
-                      ))}
-                    </Carousel>
+                  >
+                    <div className="w-full h-[75%] relative">
+                      <Carousel responsive={responsive} infinite={true}>
+                        {item.images.map((image, i) => (
+                          <div
+                            key={i}
+                            style={{
+                              position: "relative",
+                              width: "100%",
+                              height: "200px",
+                            }}
+                          >
+                            <Image
+                              src={image.thumb}
+                              alt="House image"
+                              layout="fill"
+                              objectFit="cover"
+                            />
+                          </div>
+                        ))}
+                      </Carousel>
+                    </div>
+                    <div className="flex flex-row items-center px-3 py-3 border-b-2 border-[gray]">
+                      <span className=" text-[black]">
+                        number of rooms: {item.room}
+                      </span>
+                    </div>
+                    <div className="flex flex-row items-center justify-between px-3 py-3 ">
+                      <span>Location: {item.district.title} </span>
+                      <span className=" text-[black]">
+                        {item.price} total rent
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex flex-row items-center px-3 py-3 border-b-2 border-[gray]">
-                    <span className=" text-[black]">
-                      number of rooms: {item.room}
-                    </span>
-                  </div>
-                  <div className="flex flex-row items-center justify-between px-3 py-3 ">
-                    <span>Location: {item.district.title} </span>
-                    <span className=" text-[black]">
-                      {item.price} total rent
-                    </span>
-                  </div>
-                </div>
-              ))}
+                ))}
+            </div>
           </div>
         </>
       )}

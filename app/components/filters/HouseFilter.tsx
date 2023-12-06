@@ -114,7 +114,7 @@ export default function HouseFilter() {
           </div>
         ))}
         {select && (
-          <div className="absolute bg-[#f9f6f6] top-[86px] w-[90%] h-[270px] overflow-y-scroll">
+          <div className="absolute bg-[#f9f6f6] top-[86px] w-[90%] h-[270px] overflow-y-scroll lg:top-[100px]">
             {filterList.map((item) => (
               <>
                 {item.data &&
@@ -128,19 +128,20 @@ export default function HouseFilter() {
             ))}
           </div>
         )}
-        <div className="w-full  rounded-md bg-[#19A463]  py-3 flex flex-row items-center justify-center">
+        <div
+          onClick={() => {
+            dispatch(setRangeValuesRedux(rangeValues));
+            dispatch(setHouseFilter(!houseFilter));
+          }}
+          className="w-full  rounded-md bg-[#19A463]  py-3 flex flex-row items-center justify-center"
+        >
           <Image
             src={FilterLoop}
             alt="Filter loop icon"
             width={20}
             height={20}
           />
-          <span
-            className="ml-2 text-white text-xs"
-            onClick={() => dispatch(setRangeValuesRedux(rangeValues))}
-          >
-            Filter
-          </span>
+          <span className="ml-2 text-white text-xs">Filter</span>
         </div>
       </div>
     </>

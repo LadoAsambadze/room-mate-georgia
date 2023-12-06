@@ -1,5 +1,5 @@
 .main {
-  padding: 25px 12px;
+  padding: 20px 12px;
   background-color: #00431a;
   width: 100%;
   height: 100%;
@@ -8,12 +8,12 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
-  z-index: 3;
+  z-index: 2500;
   @media (min-width: 768px) {
-    padding: 25px 24px;
+    padding: 20px 24px;
   }
   @media (min-width: 1440px) {
-    padding: 25px 80px;
+    padding: 20px 80px;
   }
 }
 
@@ -110,7 +110,7 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  z-index: 1;
+  z-index: 2000;
   top: -129px;
   left: 0;
   border-top: 0.5px solid white;
