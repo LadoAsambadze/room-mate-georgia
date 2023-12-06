@@ -29,7 +29,7 @@ interface HouseType {
 }
 
 export default function Page() {
- const [house, setHouse] = useState<HouseType[]>([])
+ const [house, setHouse] = useState<HouseType[] | null>(null)
  const searchParams = useSearchParams()
  const houseFilter = useSelector(
   (state: RootState) => state.houseFilter.houseFilter
@@ -53,19 +53,19 @@ export default function Page() {
   price_to: houseFilterRange?.price_to || searchParams.get('price_to'),
   page: searchParams.get('page') || '1',
  }
+ console.log(house)
+ const getHouse = async () => {
+  try {
+   const response = await axios.get(`https://api.roommategeorgia.ge/flats`, {
+    params: queryParams,
+   })
+   setHouse(response.data.data)
+  } catch (error) {
+   console.error(error)
+  }
+ }
 
  useEffect(() => {
-  const getHouse = async () => {
-   try {
-    const response = await axios.get(`https://api.roommategeorgia.ge/flats`, {
-     params: queryParams,
-    })
-    setHouse(response.data.data)
-   } catch (error) {
-    console.error(error)
-   }
-  }
-
   const nonNullParams = Object.fromEntries(
    Object.entries(queryParams).filter(([_, value]) => value !== null)
   )
@@ -73,9 +73,12 @@ export default function Page() {
    nonNullParams as unknown as URLSearchParams
   ).toString()
   router.push(`/house?${queryString}`)
-
   getHouse()
  }, [houseFilterRange])
+
+ useEffect(() => {
+  getHouse()
+ }, [])
 
  return (
   <>
@@ -91,7 +94,7 @@ export default function Page() {
    >
     <HouseFilter />
    </div>
-   {house.length === 0 ? (
+   {house === null ? (
     <div className="w-full  min-h-screen flex justify-center items-center">
      <CircularProgress style={{ color: 'Green' }} />
     </div>
