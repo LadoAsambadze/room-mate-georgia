@@ -4,14 +4,20 @@ import { useParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { CircularProgress } from '@mui/material'
-
 import { Carousel } from 'react-responsive-carousel'
-import Image from 'next/image'
+import 'react-responsive-carousel/lib/styles/carousel.min.css'
+
+interface ImageType {
+ thumb: string
+ original: string
+}
+interface houseType {
+ images: ImageType[]
+}
 
 export default function HouseID() {
  const params = useParams()
-
- const [houseID, setHouseID] = useState<[] | null>(null)
+ const [houseID, setHouseID] = useState<houseType | null>(null)
 
  useEffect(() => {
   const getHouseId = async () => {
@@ -30,9 +36,15 @@ export default function HouseID() {
      <CircularProgress style={{ color: 'Green' }} />
     </div>
    ) : (
-    <div className="flex flex-col items-center px-5 py-4 w-full min-h-screen bg-[#F7F7F7]">
-     <div className="w-full">
-      <Carousel></Carousel>
+    <div className=" px-5 py-4 w-full min-h-screen bg-[#F7F7F7]">
+     <div className="carousel-wrapper ">
+      <Carousel>
+       {houseID.images.map((item, i) => (
+        <div key={i}>
+         <img src={item.original} />
+        </div>
+       ))}
+      </Carousel>
      </div>
     </div>
    )}

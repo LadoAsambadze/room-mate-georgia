@@ -18,3 +18,13 @@ body {
  margin: 0;
 }
 
+.carousel .slide img {
+ max-height: 300px; /* change this to whatever you want */
+ width: auto;
+}
+.carousel .thumb img {
+ width: 100px !important; /* change this to whatever you want */
+ height: 60px !important; /* change this to whatever you want */
+}
+
+
