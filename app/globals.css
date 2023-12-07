@@ -1,13 +1,24 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
 }
 
 body {
-  width: 100%;
-  min-height: 100vh;
+ width: 100%;
+ min-height: 100vh;
+}
+
+.no-spinners::-webkit-outer-spin-button,
+.no-spinners::-webkit-inner-spin-button {
+ -webkit-appearance: none;
+ margin: 0;
+}
+
+/* Firefox */
+.no-spinners[type='number'] {
+ -moz-appearance: textfield;
 }

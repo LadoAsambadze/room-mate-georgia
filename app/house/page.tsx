@@ -39,9 +39,13 @@ export default function Page() {
  const houseFilterRange = useSelector(
   (state: RootState) => state.houseFilter.rangeValues
  )
+ const houseFilterSelected = useSelector(
+  (state: RootState) => state.houseFilter.selectedValues
+ )
 
+ console.log('test', houseFilterSelected.უბანი, 'test2', houseFilterRange)
  const queryParams = {
-  districts: houseFilterRange?.districts || null,
+  districts: houseFilterSelected?.უბანი || searchParams.get('districts'),
   bedroom_from:
    houseFilterRange?.bedroom_from || searchParams.get('bedroom_from'),
   bedroom_to: houseFilterRange?.bedroom_to || searchParams.get('bedroom_to'),
@@ -59,6 +63,7 @@ export default function Page() {
    const response = await axios.get(`https://api.roommategeorgia.ge/flats`, {
     params: queryParams,
    })
+
    setHouse(response.data.data)
   } catch (error) {
    console.error(error)
@@ -73,8 +78,11 @@ export default function Page() {
    nonNullParams as unknown as URLSearchParams
   ).toString()
   router.push(`/house?${queryString}`)
+  console.log(queryString)
   getHouse()
- }, [houseFilterRange])
+ }, [houseFilterRange, houseFilterSelected])
+
+ 
 
  useEffect(() => {
   getHouse()
@@ -118,12 +126,11 @@ export default function Page() {
        style={{
         filter: window.innerWidth < 1024 && houseFilter ? 'blur(5px)' : '',
        }}
-       className="w-full min-h-screen flex flex-col items-center justify-start gap-6   md:grid md:grid-cols-2 md:gap-6 md:items-start lg:ml-7 "
+       className="w-full h-full flex flex-col items-center justify-start gap-6   md:grid md:grid-cols-2 md:gap-6 md:items-start lg:ml-7 "
       >
        {house && house.length > 0 ? (
         house.map((item, index) => (
          <div
-          onClick={() => router.push(`/house/${item.id}`)}
           key={index}
           className="w-[330px] bg-white  rounded-md flex flex-col  rounded-2 overflow-hidden  shadow-boxItem  md:w-full"
          >
@@ -131,11 +138,13 @@ export default function Page() {
            <Carousel responsive={responsive} infinite={true}>
             {item.images.map((image, i) => (
              <div
+              onClick={() => router.push(`/house/${item.id}`)}
               key={i}
               style={{
                position: 'relative',
                width: '100%',
                height: '200px',
+               cursor: 'pointer',
               }}
              >
               <Image
@@ -148,24 +157,29 @@ export default function Page() {
             ))}
            </Carousel>
           </div>
-          <div className="flex flex-row items-center px-3 pb-2 pt-5 border-b border-[#acb2af]">
-           <Image src={DoorIcon} alt="Door Icon" />
-           <span className=" text-[black] ml-2 text-xs">
-            number of rooms: {item.room}
-           </span>
-          </div>
-          <div className="flex flex-row items-center justify-between px-3 py-3 ">
-           <div className="flex flex-row items-center">
-            <Image src={LocationIcon} alt="Location Icon" />
+          <div
+           onClick={() => router.push(`/house/${item.id}`)}
+           className=" cursor-pointer"
+          >
+           <div className="flex flex-row items-center px-3 pb-2 pt-5 border-b border-[#acb2af]">
+            <Image src={DoorIcon} alt="Door Icon" />
             <span className=" text-[black] ml-2 text-xs">
-             Location: 
-             {item.district.title}
+             number of rooms: {item.room}
             </span>
            </div>
+           <div className="flex flex-row items-center justify-between px-3 py-3 ">
+            <div className="flex flex-row items-center">
+             <Image src={LocationIcon} alt="Location Icon" />
+             <span className=" text-[black] ml-2 text-xs">
+              Location: 
+              {item.district.title}
+             </span>
+            </div>
 
-           <span className=" text-[black] ml-2 text-xs">
-            {item.price} total rent
-           </span>
+            <span className=" text-[black] ml-2 text-xs">
+             {item.price} total rent
+            </span>
+           </div>
           </div>
          </div>
         ))
