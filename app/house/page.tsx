@@ -53,7 +53,7 @@ export default function Page() {
   price_to: houseFilterRange?.price_to || searchParams.get('price_to'),
   page: searchParams.get('page') || '1',
  }
- console.log(house)
+
  const getHouse = async () => {
   try {
    const response = await axios.get(`https://api.roommategeorgia.ge/flats`, {
@@ -118,7 +118,7 @@ export default function Page() {
        style={{
         filter: window.innerWidth < 1024 && houseFilter ? 'blur(5px)' : '',
        }}
-       className="w-full min-h-screen flex flex-col items-center justify-center gap-6   md:grid md:grid-cols-2 md:gap-6 md:items-start lg:ml-7 "
+       className="w-full min-h-screen flex flex-col items-center justify-start gap-6   md:grid md:grid-cols-2 md:gap-6 md:items-start lg:ml-7 "
       >
        {house && house.length > 0 ? (
         house.map((item, index) => (

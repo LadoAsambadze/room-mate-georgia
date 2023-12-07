@@ -9,6 +9,7 @@ import {
  setRangeValuesRedux,
 } from '@/redux/houseFilterSlice'
 import { useDispatch, useSelector } from 'react-redux'
+
 interface DataType {
  title: string
 }
@@ -49,7 +50,7 @@ export default function HouseFilter() {
  return (
   <>
    <div
-    className=" w-screen bg-white px-4 py-4 rounded-md  rounded-t-none flex flex-col items-start h-[400px] justify-between
+    className=" w-screen bg-white px-4 py-4 rounded-md  rounded-t-none flex flex-col items-start h-full justify-between
    xl:bg-[#F7F7F7]  "
    >
     {filterList.map((item, index) => (
@@ -66,7 +67,8 @@ export default function HouseFilter() {
       {item.search_type === 'choice' && (
        <div
         onClick={() => setSelect(!select)}
-        className="w-full bg-[#e3e3e3] cursor-pointer flex flex-row justify-between items-center px-3 py-3"
+        className="w-full bg-[#e3e3e3] cursor-pointer mb-[10px] mt-1 px-3 py-[8px] flex flex-row justify-between items-center overflow-hidden rounded-md
+        lg:px-3 lg:py-3"
        >
         <button className="text-xs">Choice</button>
         <Image
@@ -79,11 +81,14 @@ export default function HouseFilter() {
        </div>
       )}
       {item.search_type === 'range' && (
-       <div className="flex flex-row justify-between items-center w-[50%] overflow-hidden">
+       <div
+        className="flex flex-row justify-between items-center w-full overflow-hidden lg:justify-between
+       "
+       >
         <input
          type="number"
          placeholder="Start"
-         className="mr-2 w-[50%] bg-[#E3E3E3] rounded-md px-1 py-1 text-[14px]"
+         className="w-[50%] mr-2 lg:mr-3 mt-1 bg-[#E3E3E3] rounded-md  mb-[10px] px-2 py-[5px] text-[14px] lg:px-3 lg:py-3 "
          onChange={(e) =>
           handleRangeChange(
            item.title === 'საძინებელი'
@@ -103,7 +108,7 @@ export default function HouseFilter() {
         <input
          type="number"
          placeholder="End"
-         className="w-[50%]"
+         className="w-[50%] bg-[#E3E3E3] mt-1 rounded-md  mb-[10px] px-2 py-[5px] text-[14px] lg:px-3 lg:py-3 "
          onChange={(e) =>
           handleRangeChange(
            item.title === 'საძინებელი'
@@ -144,7 +149,7 @@ export default function HouseFilter() {
 
       dispatch(setHouseFilter(!houseFilter))
      }}
-     className="w-full  rounded-md bg-[#19A463]  py-3 flex flex-row items-center justify-center"
+     className="w-full  rounded-md bg-[#19A463]  py-3 flex flex-row items-center justify-center mt-5"
     >
      <Image src={FilterLoop} alt="Filter loop icon" width={20} height={20} />
      <span className="ml-2 text-white text-xs">Filter</span>
