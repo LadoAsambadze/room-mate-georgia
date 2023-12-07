@@ -23,7 +23,7 @@ export default function Main() {
       Find a roommate and <br />
       split the rent
      </h1>
-     <div className="flex flex-col  items-center md:flex-row md:mt-16 ">
+     <div className="flex flex-col items-center md:flex-row md:mt-16 ">
       <div
        className="text-white  cursor-pointer bg-[#19a463] flex flex-row items-center px-[90px] py-4 rounded-md border-none mt-9
             md:mt-0 md:px-16"

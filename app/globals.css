@@ -18,7 +18,3 @@ body {
  margin: 0;
 }
 
-/* Firefox */
-.no-spinners[type='number'] {
- -moz-appearance: textfield;
-}
