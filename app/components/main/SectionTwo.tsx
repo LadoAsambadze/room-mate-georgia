@@ -1,15 +1,15 @@
-"use client";
-import Image from "next/image";
-import PC from "/public/images/pc.png";
-import SearchLoop from "/public/images/search-loop.png";
-import Deal from "/public/images/deal.png";
+'use client'
+import Image from 'next/image'
+import PC from '/public/images/pc.png'
+import SearchLoop from '/public/images/search-loop.png'
+import Deal from '/public/images/deal.png'
 
 export default function SectionTwo() {
   return (
     <>
       <div className="flex bg-[#f7f7f7]  min-h-screen flex-col items-center  md:pl-10 md:pr-5 xl:px-20">
         <div
-          style={{ marginTop: "-320px" }}
+          style={{ marginTop: '-320px' }}
           className="w-full items-center flex flex-col"
         >
           <h1 className="text-white  text-xl md:text-2xl xl:text-3xl">
@@ -37,7 +37,7 @@ export default function SectionTwo() {
             >
               <Image src={Deal} alt="PC icon" className="mb-20" />
               <span
-                style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+                style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}
                 className="text-[#484848] text-md text-center"
               >
                 Learn about them through their profile and contact them
@@ -56,5 +56,5 @@ export default function SectionTwo() {
         </div>
       </div>
     </>
-  );
+  )
 }
