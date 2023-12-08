@@ -69,7 +69,6 @@ export default function Page() {
    console.error(error)
   }
  }
- 
 
  useEffect(() => {
   const nonNullParams = Object.fromEntries(
@@ -82,8 +81,6 @@ export default function Page() {
   console.log(queryString)
   getHouse()
  }, [houseFilterRange, houseFilterSelected])
-
- 
 
  useEffect(() => {
   getHouse()

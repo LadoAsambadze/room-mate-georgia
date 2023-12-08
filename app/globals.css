@@ -19,12 +19,34 @@ body {
 }
 
 .carousel .slide img {
- max-height: 300px; /* change this to whatever you want */
+ max-height: 300px;
  width: auto;
 }
 .carousel .thumb img {
- width: 100px !important; /* change this to whatever you want */
- height: 60px !important; /* change this to whatever you want */
+ width: 100px !important;
+ height: 60px !important;
 }
 
+.thumbs-wrapper {
+ margin-top: 0px !important;
+}
 
+.control-dots {
+ display: none;
+}
+
+.carousel {
+ width: 320px;
+ height: 260px;
+}
+
+.carousel-slider {
+ background-color: black;
+ border-top-left-radius: 10px;
+ border-top-right-radius: 10px;
+ overflow: hidden;
+}
+
+.thumb {
+ width: 100%;
+}
