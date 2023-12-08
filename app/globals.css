@@ -2,51 +2,18 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 * {
- margin: 0;
- padding: 0;
- box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
- width: 100%;
- min-height: 100vh;
+  width: 100%;
+  min-height: 100vh;
 }
 
 .no-spinners::-webkit-outer-spin-button,
 .no-spinners::-webkit-inner-spin-button {
- -webkit-appearance: none;
- margin: 0;
-}
-
-.carousel .slide img {
- max-height: 300px;
- width: auto;
-}
-.carousel .thumb img {
- width: 100px !important;
- height: 60px !important;
-}
-
-.thumbs-wrapper {
- margin-top: 0px !important;
-}
-
-.control-dots {
- display: none;
-}
-
-.carousel {
- width: 320px;
- height: 260px;
-}
-
-.carousel-slider {
- background-color: black;
- border-top-left-radius: 10px;
- border-top-right-radius: 10px;
- overflow: hidden;
-}
-
-.thumb {
- width: 100%;
+  -webkit-appearance: none;
+  margin: 0;
 }

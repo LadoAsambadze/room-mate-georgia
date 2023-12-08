@@ -25,7 +25,7 @@ export default function Main() {
           </h1>
           <div className="flex flex-col items-center md:flex-row md:mt-16 ">
             <div
-              className="text-white w-full cursor-pointer bg-[#19a463] flex flex-row items-center px-[90px] py-4 rounded-md border-none mt-9
+              className="text-white  cursor-pointer bg-[#19a463] flex flex-row justify-center px-[90px] py-4 rounded-md border-none mt-9
             md:mt-0 md:px-16"
             >
               <svg
@@ -47,11 +47,11 @@ export default function Main() {
 
             <div
               onClick={() => router.push('/house')}
-              className="text-white  cursor-pointer bg-[#19a463] flex flex-row align-center px-[90px] py-4 rounded-md border-none mt-6 
+              className="text-white  cursor-pointer bg-[#19a463] flex flex-row justify-center px-[90px] py-4 rounded-md border-none mt-6 
             md:mt-0 md:ml-10"
             >
               <svg
-                className="mr-4 icon"
+                className="mr-2 icon"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"

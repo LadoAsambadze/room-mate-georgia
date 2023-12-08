@@ -6,6 +6,7 @@ import './_header.scss'
 import { RootState, setMenu } from '@/redux/menuSlice'
 import BurgerList from './BurgerList'
 import { useRouter } from 'next/navigation'
+import WebsiteLogo from '../../../public/images/WebsiteLogo.png'
 
 export default function Header() {
   const menu = useSelector((state: RootState) => state.menu.menu)
@@ -19,8 +20,8 @@ export default function Header() {
           onClick={() => router.push('/')}
           height={30}
           width={177}
-          src="/images/rommate2-05.png"
-          alt="Logo Image"
+          src={WebsiteLogo}
+          alt="Website Logo "
           className="cursor-pointer"
         />
         <div
